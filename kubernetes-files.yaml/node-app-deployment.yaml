@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-deployment
+  labels:
+    app: nodejs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+      - name: nodejs-container
+        image: abdelrhmandevops/devops-task-image
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+          limits:
+            memory: "300Mi"
+            cpu: "400m"
+        envFrom:
+        - configMapRef:
+            name: config-maps
+        - secretRef:
+            name: my-secret
+        env:
+          - name: PORT
+            value: "8080"
+          - name: redis_service
+            value: redis-service
+          - name: mongo_service
+            value: mongo-service
+          - name: mongo_port
+            value: "27017"
+          - name: redis_port
+            value: "6379"
