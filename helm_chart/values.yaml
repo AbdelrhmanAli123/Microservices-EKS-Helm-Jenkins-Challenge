@@ -1,0 +1,38 @@
+appName: my-nodejs-app
+nodejs_service:
+  type: NodePort
+  port: 80
+  targetPort: 8080
+  # Remove the 'nodePort' line
+
+mongo_service:
+  type: ClusterIP
+  port: 27017
+  targetPort: 27017
+  protocol: TCP
+
+redis_service:
+  type: ClusterIP
+  port: 6379
+  targetPort: 6379
+  protocol: TCP
+
+replicas: 
+  mongo_replica: 3
+  redis_replica: 3
+  nodejs_replica: 3
+
+resources:
+  min_memory: "100Mi"
+  min_cpu: "100m"
+  max_memory: "200Mi"
+  max_cpu: "100m"
+
+volume:
+  pv_name: 
+  pvc_name:
+  pv_storage:
+  pvc_storage:
+  access_mode:
+  path:
+
