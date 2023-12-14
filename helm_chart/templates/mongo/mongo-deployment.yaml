@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo-deployment
+  name: {{.Release.Name}}mongo-deployment
   labels:
     app: mongo
 spec:
-  replicas: {{.Values.replicas.mongo_replica}}
+  replicas: 1
   selector:
     matchLabels:
       app: mongo
@@ -32,13 +32,13 @@ spec:
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: "admin"
 
-      #   volumeMounts:
-      #   - name: mongo-persistent-storage
-      #     mountPath: /data/db
-      # volumes:
-      # - name: mongo-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: my-pvc
-      # #   envFrom:
+        volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+      volumes:
+      - name: mongo-persistent-storage
+        persistentVolumeClaim:
+          claimName: my-pvc
+      #   envFrom:
       #   - secretRef:
       #       name: my-secret

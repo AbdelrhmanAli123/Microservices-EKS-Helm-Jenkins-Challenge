@@ -26,17 +26,17 @@ spec:
             cpu: {{.Values.resources.max_cpu}}
         envFrom:
         - configMapRef:
-            name: config-maps
+            name: my-configs
         - secretRef:
             name: my-secrets
-        env:
-          - name: PORT
-            value: "8080"
-          - name: redis_service
-            value: redis-service
-          - name: mongo_service
-            value: mongo-service
-          - name: mongo_port
-            value: "27017"
-          - name: redis_port
-            value: "6379"
+        # env:
+        #   - name: PORT
+        #     value: "8080"
+        #   - name: redis_service
+        #     value: redis-service
+        #   - name: mongo_service
+        #     value: mongo-service
+        #   - name: mongo_port
+        #     value: "27017"
+        #   - name: redis_port
+        #     value: "6379"

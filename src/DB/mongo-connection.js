@@ -7,7 +7,7 @@ const mongoPort = process.env.mongo_port || 27017
 
 export const DB =  async ()=>{
     try{
-        await mongoose.connect(`mongodb://${mongoUserName}:${mongoPassword}@${mongoService}:${mongoPort}/ballo?authSource=admin`);
+        await mongoose.connect(`mongodb://${mongoUserName}:${mongoPassword}@${mongoService}:${mongoPort}/ballo?readPreference=nearest&replicaSet=rs0&authSource=admin`);
         console.log("connected to mongoDB")
 
     } catch (err){
