@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-deployment
+  name: {{.Release.Name}}-redis-deployment
   labels:
     app: redis
 spec:

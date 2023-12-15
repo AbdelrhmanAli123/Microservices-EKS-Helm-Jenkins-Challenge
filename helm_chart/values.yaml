@@ -1,4 +1,6 @@
 appName: my-nodejs-app
+appImage: abdelrhmandevops/devops-task-image
+
 nodejs_service:
   type: NodePort
   port: 80

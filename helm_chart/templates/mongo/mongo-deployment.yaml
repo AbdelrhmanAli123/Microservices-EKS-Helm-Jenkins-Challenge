@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Release.Name}}mongo-deployment
+  name: {{.Release.Name}}-mongo-deployment
   labels:
     app: mongo
 spec:
@@ -38,7 +38,7 @@ spec:
       volumes:
       - name: mongo-persistent-storage
         persistentVolumeClaim:
-          claimName: my-pvc
+          claimName: {{.Release.Name}}-my-pvc
       #   envFrom:
       #   - secretRef:
       #       name: my-secret

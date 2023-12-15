@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Values.appName}}
+  name: {{.Release.Name}}-{{.Values.appName}}
   labels:
     app: {{.Values.appName}}
 spec:
@@ -14,9 +14,13 @@ spec:
       labels:
         app: {{.Values.appName}}
     spec:
+      initContainers:
+      - name: init-mongodb
+        image: busybox:latest
+        command: ["sh", "-c", "until nc -zv {{.Release.Name}}-mongo-service:27017; do echo waiting for MongoDB; sleep 2; done"]
       containers:
       - name: nodejs-container
-        image: abdelrhmandevops/devops-task-image
+        image: {{.Values.appImage}}
         resources:
           requests:
             memory: {{.Values.resources.min_memory}}
@@ -26,17 +30,7 @@ spec:
             cpu: {{.Values.resources.max_cpu}}
         envFrom:
         - configMapRef:
-            name: my-configs
+            name: {{.Release.Name}}-my-configs
         - secretRef:
-            name: my-secrets
-        # env:
-        #   - name: PORT
-        #     value: "8080"
-        #   - name: redis_service
-        #     value: redis-service
-        #   - name: mongo_service
-        #     value: mongo-service
-        #   - name: mongo_port
-        #     value: "27017"
-        #   - name: redis_port
-        #     value: "6379"
+            name: {{.Release.Name}}-my-secrets
+        
