@@ -51,7 +51,7 @@ pipeline {
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
                         credentialsId: 'aws_cred'
                     ]]) {
-                    sh "aws eks update-kubeconfig --region us-east-2 --name my-eks-cluster"
+                    sh "aws eks update-kubeconfig --region us-east-2 --name my-eks"
                     sh "helm upgrade --install --force micro-app ./helm_chart --set appimage=${IMAGE_NAME}:${BUILD_NUMBER}"  
                     sh "Docker rmi --force appimage=${IMAGE_NAME}:${BUILD_NUMBER} || true " // it's not mendatory step but i don't have alot of storage
                     }
