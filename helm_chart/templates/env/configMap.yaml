@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  PORT: "{{.Values.nodejs_service.port | default "8080"}}"
+  mongo_port: "{{.Values.mongo_service.port | default "27017"}}"
+  mongo_service: {{.Release.Name}}-{{.Values.mongo_service.name}}
+  redis_port: "{{.Values.redis_service.portc | default "6379"}}"
+  redis_service: {{.Release.Name}}-{{.Values.redis_service.name}}
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: {{.Release.Name}}-{{.Values.configMap.name}}

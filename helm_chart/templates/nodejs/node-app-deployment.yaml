@@ -21,6 +21,8 @@ spec:
       containers:
       - name: nodejs-container
         image: {{.Values.appImage}}
+        ports:
+        - containerPort: {{.Values.nodejs_service.port | default "8080"}}
         resources:
           requests:
             memory: {{.Values.resources.min_memory}}
@@ -30,7 +32,7 @@ spec:
             cpu: {{.Values.resources.max_cpu}}
         envFrom:
         - configMapRef:
-            name: {{.Release.Name}}-my-configs
+            name: {{.Release.Name}}-{{.Values.configMap.name}}
         - secretRef:
-            name: {{.Release.Name}}-my-secrets
+            name: {{.Release.Name}}-{{.Values.secret.name}}
         
