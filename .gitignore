@@ -1,3 +1,4 @@
 node_modules
 .env
 package-*sonar-project.properties
+package-lock.json
