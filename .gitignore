@@ -3,3 +3,4 @@ node_modules
 package-*sonar-project.properties
 package-lock.json
 .gitignore
+.dockerignore
