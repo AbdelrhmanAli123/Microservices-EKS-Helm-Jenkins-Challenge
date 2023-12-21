@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-nodejs-service
+spec:
+  selector:
+    app: my-nodejs-app
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30000
