@@ -26,7 +26,7 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
 1. **Clone the Repository**
 
     ```bash
-    git clone https://github.com/your-username/your-repository.git
+    git clone https://github.com/AbdelrhmanAli123/microservices-devops-task.git
     cd your-repository
     ```
 
@@ -57,33 +57,17 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
    - Open a web browser and navigate to `http://localhost:your-port` to access the application.
    - Use tools like Postman to test the implemented endpoints locally.
    - **EndPoints**
-       - http://localhost:port/login  --> post method        # when hitting the endpoint for adding data to database you should use json and only pass this key {"userName":"your name"}
+       - http://localhost:port/login  --> post method        # when hitting the endpoint for adding data to database you should use json and only pass this key {"userName": "your name"}
        - http://localhost:port/login  --> get method         # retrive the data stored in MongoDB
 
 
 7. **Install jenkins, helm, kubectl and eksctl**
-    ### install jenkins
-    ```bash
-    eksctl create cluster --name my-eks-cluster --version 1.21 --region your-region
-    ```
-
-    ### install helm
-    ```bash
-    eksctl create cluster --name my-eks-cluster --version 1.21 --region your-region
-    ```
-    ### install kubectl
-    ```bash
-    eksctl create cluster --name my-eks-cluster --version 1.21 --region your-region
-    ```
-
-    ### install eksctl
-    ```bash
-    eksctl create cluster --name my-eks-cluster --version 1.21 --region your-region
-    ```
+    ### install these tools on the node that you'll run the pipeline on
 
 6. **Create Amazon EKS using eksctl**
     ```bash
-    eksctl create cluster --name my-eks-cluster --version 1.21 --region your-region
+    # it may take about 20 min
+    eksctl create cluster --name my-eks-cluster --version you-cluster-version --region your-region
     ```
    #
    ##### note: if you can't ping the EKS cluster nodes, make sure the SG allow traffic
@@ -92,6 +76,20 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
 8. **Instll the CSi driver for eks using eksctl to create EBS volume**
     ```bash
     # We have to do some steps before installing the CSI driver to allow the EKS to be authorized to provision EBS volume
+
+    # variables used to create EKS
+    export AWS_PROFILE="my-profile" # CHANGEME
+    export EKS_CLUSTER_NAME="my-cluster" # CHANGEME
+    export EKS_REGION="us-west-2"
+    export EKS_VERSION="1.25"
+        
+    # variables used in automation
+    export ROLE_NAME="${EKS_CLUSTER_NAME}_EBS_CSI_DriverRole"
+    export ACCOUNT_ID=$(aws sts get-caller-identity \
+      --query "Account" \
+      --output text
+    )
+    export ACCOUNT_ROLE_ARN="arn:aws:iam::$ACCOUNT_ID:role/$ROLE_NAME"
 
     # Add OIDC Provider Support
     eksctl utils associate-iam-oidc-provider \
@@ -140,17 +138,19 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
     
 9. **Create load balancer on aws to attach it with ingress controller**
 
-   create traget group and add the EKS instances and type the port used for ingress service
-   i spacified 31111 port for the ingress service, so it's up to you to use the port that need in the accpted port range    
-   create the LB and add the traget group
+   - create traget group and add the EKS instances and type the port used for ingress service
+   - I specified 31111 port for the ingress service, so it's up to you to use the port you need in the accepted port range    
+   - create the LB and add the traget group
     
 10. **Extra Step SSL certificate**
     in case you have domain name you can import public certificate from AWS ACM service and attach the certificate to LB
-    then create CNAME recored to make your domain name map to LB URL
+    then create a CNAME record to make your domain name map to the LB URL
     
-12. **Deploy the APP using jenkins**
-
-13. **Access the Application**
+11. **Deploy the APP using jenkins**
+    - store the aws, dockerhub and github credential in your Jenkins server
+    - run the pipeline ya m3lm using the Jenkins file provided in this repo
+        
+12. **Access the Application**
 
     Once deployed, access the application at `http://your-loadbalancer-url`.
 
