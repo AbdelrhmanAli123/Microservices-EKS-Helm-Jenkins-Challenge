@@ -68,6 +68,7 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
     ```bash
     # it may take about 20 min
     eksctl create cluster --name my-eks-cluster --version you-cluster-version --region your-region
+    eksctl create cluster --name my-eks --region your-region --version you-cluster-version --nodegroup-name my-eks-node-group --node-type t3.small --nodes 2 --ssh-public-key your/puplic/ip/path  --nodes-min 1 --nodes-max 3 --node-private-networking=false 
     ```
    #
    ##### note: if you can't ping the EKS cluster nodes, make sure the SG allow traffic
@@ -138,23 +139,23 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
     # note: There is other way to install the CSI driver using HELM chart :)
      ```
     
-9. **Create load balancer on aws to attach it with ingress controller**
-
-   - create traget group and add the EKS instances and type the port used for ingress service
-   - I specified 31111 port for the ingress service, so it's up to you to use the port you need in the accepted port range    
-   - create the LB and add the traget group
+9. **Install the nginx ingress controller using helm**
+    ```bash
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
     
-10. **Extra Step SSL certificate**
-    in case you have domain name you can import public certificate from AWS ACM service and attach the certificate to LB
-    then create a CNAME record to make your domain name map to the LB URL
-    
+    helm upgrade --install ingress-nginx ingress-nginx \ 
+             --repo https://kubernetes.github.io/ingress-nginx \ 
+             --namespace ingress-nginx \
+             --create-namespace
+    ```
+       
 11. **Deploy the APP using jenkins**
     - store the aws, dockerhub and github credential in your Jenkins server
     - run the pipeline ya m3lm using the Jenkins file provided in this repo
         
 12. **Access the Application**
 
-    Once deployed, access the application at `http://your-loadbalancer-url`.
+    Once deployed, access the application at `http://your-loadbalancer-url/login`.
 
 
 
