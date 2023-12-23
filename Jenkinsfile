@@ -8,13 +8,16 @@ pipeline {
     IMAGE_NAME = 'abdelrhmandevops/microservices-task'
     
   }
-
+    // use this stage if your repo is private otherwise don't declare this stage
     stages {
         stage("Code Checkout from Github") {
           steps {
             git credentialsId:'github_cred', url: '${GIT_REPO}', branch: '${GIT_BRANCH}'
           }
       }
+
+
+      
         // ----------------------------------------------------
         // this for code quelity but we don't need it here 
         // ----------------------------------------------------
@@ -34,7 +37,9 @@ pipeline {
         //         }
         //     }
         // }
-        
+
+
+      
         stage('Build Docker Image and push it to DockerHub') {
             steps {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub_cred', passwordVariable: 'password', usernameVariable: 'username')]) {
