@@ -1,11 +1,20 @@
-# Project Name: Node.js Web Application with MongoDB and Redis
+<div align="center">
+  <h1 style="color: red;">Solve microservices-k8s-helm-jenkins task :globe_with_meridians::hammer_and_wrench:</h1>
+</div> 
 
-## Overview
+##
+## :zap: DevOps Assignment
+
+![task](https://github.com/AbdelrhmanAli123/microservices-devops-task/assets/133269614/3b3cc50b-c9d6-47f1-9f2e-8d19b8075a04)
+
+
+## 
+## :scroll: Overview
 
 This project involves the deployment of a sample web application in a containerized environment using Docker and Kubernetes. The application is built using Node.js and MongoDB for data storage, with Redis being used as a caching service. Two endpoints have been implemented: one for saving user information (username and IP) to MongoDB, and another for retrieving the list of users and their IPs.
 Notably, a Jenkins CI/CD pipeline has been integrated for streamlined development and deployment on Amazon EKS.
 
-### Prerequisites
+## :gear: Requirements:-
 
 - [Docker](https://www.docker.com/)
 - [Node.js](https://nodejs.org/)
@@ -17,11 +26,11 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
 - [Docker Hub Account](https://hub.docker.com/)
 
 
-### Assumptions
+## :diamond_shape_with_a_dot_inside: Assumptions
 
 - I assume that you have a basic understanding of Nodejs, Docker, Kubernetes, Helm, jenkins and Amazon EKS.
 
-### Steps
+## ⌛  Steps
 
 1. **Clone the Repository**
 
@@ -155,10 +164,23 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
         
 12. **Access the Application**
 
-    Once deployed, access the application at `http://your-loadbalancer-url/login`.
+    - Once deployed, access the application at `http://your-loadbalancer-url/login`.
+    - Use Postman to make sure the app works well  
+##  
+![postman](https://github.com/AbdelrhmanAli123/microservices-devops-task/assets/133269614/bc89392d-b5f8-416c-b2a9-ce66a59f0b61)
+##
+:rocket: Conclusion
+
+Congratulations on completing the microservices-k8s-helm-jenkins task! By following the detailed steps outlined in this README, you've successfully deployed a sample web application in a containerized environment using Docker and Kubernetes. The integration of Jenkins CI/CD pipeline for Amazon EKS showcases an automated and streamlined development and deployment process.
+
+## :diamond_shape_with_a_dot_inside: Key Achievements:
+
+- **Containerized Environment:** Utilized Docker for containerizing the application components, ensuring consistency across different environments.
+
+- **Orchestration with Kubernetes:** Employed Kubernetes for orchestrating and managing the deployment, scaling, and operation of containerized applications.
+
+- **CI/CD Integration with Jenkins:** Integrated Jenkins to automate the build, test, and deployment processes, promoting continuous integration and continuous delivery.
+
+- **Amazon EKS Deployment:** Successfully deployed the application on Amazon EKS, a managed Kubernetes service.
 
 
-
-## Evaluation Criteria
-
-This project will be evaluated based on the provided design diagram, Docker files, CI/CD configuration, Helm chart, Kubernetes manifests, and the completeness of the README file. Additionally, the clarity of assumptions, prioritization, and testing summaries will be considered during evaluation.
