@@ -3,10 +3,10 @@ appImage: abdelrhmandevops/devops-task-image
 
 nodejs_service:
   name: nodejs-service
-  type: LoadBalancer
-  port: 80
+  type: ClusterIP
+  port: 8080
   targetPort: 8080
-  NodePort: 31000
+  nodePort: 31000
   # Remove the 'nodePort' line
 
 mongo_service:

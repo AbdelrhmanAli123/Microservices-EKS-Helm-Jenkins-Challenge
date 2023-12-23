@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: a084dccc3458c4639ba155b4febc74d1-743726407.us-east-2.elb.amazonaws.com
+    http:
+      paths:
+      - path: /login
+        pathType: Prefix
+        backend:
+          service:
+            name: {{.Release.Name}}-{{.Values.nodejs_service.name}}
+            port:
+              number: 8080
+  - host: a084dccc3458c4639ba155b4febc74d1-743726407.us-east-2.elb.amazonaws.com
+    http:
+      paths:
+      - path: /json 
+        pathType: Prefix
+        backend:
+          service:
+            name: {{.Release.Name}}-{{.Values.nodejs_service.name}}
+            port:
+              number: 8080
+

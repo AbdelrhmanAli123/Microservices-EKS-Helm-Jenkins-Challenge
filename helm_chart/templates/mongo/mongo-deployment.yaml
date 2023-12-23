@@ -26,8 +26,8 @@ spec:
           limits:
             memory: {{.Values.resources.max_memory}}
             cpu: {{.Values.resources.max_cpu}}
-        env:
-        - name: MONGO_INITDB_ROOT_USERNAME
+        # env:
+        # - name: MONGO_INITDB_ROOT_USERNAME
         envFrom:
         - secretRef:
             name: {{.Release.Name}}-{{.Values.secret.name}}

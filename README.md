@@ -78,10 +78,10 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
     # We have to do some steps before installing the CSI driver to allow the EKS to be authorized to provision EBS volume
 
     # variables used to create EKS
-    export AWS_PROFILE="my-profile" # CHANGEME
-    export EKS_CLUSTER_NAME="my-cluster" # CHANGEME
-    export EKS_REGION="us-west-2"
-    export EKS_VERSION="1.25"
+    export AWS_PROFILE="my-profile" # CHANGE ME IF YOU HAVE MUTIBLE AWS ACC
+    export EKS_CLUSTER_NAME="my-cluster" # CHANGE ME
+    export EKS_REGION="us-east-2" # CHANGE ME
+    export EKS_VERSION="1.26"  # CHANGE ME IF YOU NEED
         
     # variables used in automation
     export ROLE_NAME="${EKS_CLUSTER_NAME}_EBS_CSI_DriverRole"
@@ -89,6 +89,8 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
       --query "Account" \
       --output text
     )
+    echo ${ACCOUNT_ID} 
+
     export ACCOUNT_ROLE_ARN="arn:aws:iam::$ACCOUNT_ID:role/$ROLE_NAME"
 
     # Add OIDC Provider Support

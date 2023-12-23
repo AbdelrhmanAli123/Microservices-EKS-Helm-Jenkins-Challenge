@@ -9,5 +9,5 @@ spec:
   ports:
     - port: {{.Values.nodejs_service.port | default "8080"}}
       targetPort: {{.Values.nodejs_service.targetPort | default "8080"}}
-      nodePort: {{.Values.nodejs_service.nodePort | default "30000" }}
+      # nodePort: {{.Values.nodejs_service.nodePort | default "30000" }}
     
