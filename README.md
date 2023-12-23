@@ -91,8 +91,53 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
 
 8. **Instll the CSi driver for eks using eksctl to create EBS volume**
     ```bash
-    eksctl create cluster --name my-eks-cluster --version 1.21 --region your-region
-    ```
+    # We have to do some steps before installing the CSI driver to allow the EKS to be authorized to provision EBS volume
+
+    # Add OIDC Provider Support
+    eksctl utils associate-iam-oidc-provider \
+      --cluster $EKS_CLUSTER_NAME \
+      --region $EKS_REGION \
+      --approve
+
+    # AWS managed policy for CSI driver SA to make EBS API calls
+    POLICY_ARN="arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+    
+    # AWS IAM role bound to a Kubernetes service account
+    eksctl create iamserviceaccount \
+      --name "ebs-csi-controller-sa" \
+      --namespace "kube-system" \
+      --cluster $EKS_CLUSTER_NAME \
+      --region $EKS_REGION \
+      --attach-policy-arn $POLICY_ARN \
+      --role-only \
+      --role-name $ROLE_NAME \
+      --approve
+
+
+    # Create Addon
+    eksctl create addon \
+      --name "aws-ebs-csi-driver" \
+      --cluster $EKS_CLUSTER_NAME \
+      --region=$EKS_REGION \
+      --service-account-role-arn $ACCOUNT_ROLE_ARN \
+      --force
+
+    
+    # Get status of the driver, must be STATUS=ACTIVE
+    eksctl get addon \
+      --name "aws-ebs-csi-driver" \
+      --region $EKS_REGION \
+      --cluster $EKS_CLUSTER_NAME
+
+    
+    # You can check on the running EBS CSI pods with the following command:
+    kubectl get pods \
+      --namespace "kube-system" \
+      --selector "app.kubernetes.io/name=aws-ebs-csi-driver"
+
+    # note: There is other way to install the CSI driver using HELM chart :)
+     ```
+    
 9. **Create load balancer on aws to attach it with ingress controller**
 
    create traget group and add the EKS instances and type the port used for ingress service
