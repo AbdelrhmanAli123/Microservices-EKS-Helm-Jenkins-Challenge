@@ -35,8 +35,7 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
 1. **Clone the Repository**
 
     ```bash
-    git clone https://github.com/AbdelrhmanAli123/microservices-devops-task.git
-    cd your-repository
+    git clone https://github.com/AbdelrhmanAli123/Microservices-EKS-Helm-Jenkins-Challenge
     ```
 
 2. **Build and Push Docker Image to Docker Hub**
