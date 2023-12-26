@@ -168,7 +168,7 @@ Notably, a Jenkins CI/CD pipeline has been integrated for streamlined developmen
 ##  
 ![postman](https://github.com/AbdelrhmanAli123/microservices-devops-task/assets/133269614/bc89392d-b5f8-416c-b2a9-ce66a59f0b61)
 ##
-:rocket: Conclusion
+## :rocket: Conclusion
 
 Congratulations on completing the microservices-k8s-helm-jenkins task! By following the detailed steps outlined in this README, you've successfully deployed a sample web application in a containerized environment using Docker and Kubernetes. The integration of Jenkins CI/CD pipeline for Amazon EKS showcases an automated and streamlined development and deployment process.
 
@@ -178,7 +178,9 @@ Congratulations on completing the microservices-k8s-helm-jenkins task! By follow
 
 - **Orchestration with Kubernetes:** Employed Kubernetes for orchestrating and managing the deployment, scaling, and operation of containerized applications.
 
-- **CI/CD Integration with Jenkins:** Integrated Jenkins to automate the build, test, and deployment processes, promoting continuous integration and continuous delivery.
+- **Helm package manager:** Utilized Helm chart to package the K8s manifest files to ease the process of Application Deployment
+
+- **CI/CD Integration with Jenkins:** Integrated Jenkins to automate the build and deployment processes, promoting continuous integration and continuous delivery.
 
 - **Amazon EKS Deployment:** Successfully deployed the application on Amazon EKS, a managed Kubernetes service.
 
