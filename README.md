@@ -1,7 +1,4 @@
-<div align="center">
-  <h1 style="color: red;">Solve microservices-k8s-helm-jenkins task :globe_with_meridians::hammer_and_wrench:</h1>
-</div> 
-
+Solve microservices-k8s-helm-jenkins task
 ##
 ## :zap: DevOps Assignment
 
