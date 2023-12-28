@@ -1,5 +1,6 @@
-Solve microservices-k8s-helm-jenkins task
-##
+# Devops Project: video-converter
+**Converting mp4 videos to mp3 audio in a microservices architecture,
+deploying a Python-based Microservice Application on AWS EKS**
 ## :zap: DevOps Assignment
 
 ![task](https://github.com/AbdelrhmanAli123/microservices-devops-task/assets/133269614/3b3cc50b-c9d6-47f1-9f2e-8d19b8075a04)
