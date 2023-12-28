@@ -10,7 +10,7 @@
 ## 
 ## :scroll: Overview
 
-This project involves the deployment of a sample web application in a containerized environment using Docker and Kubernetes. The application is built using Node.js and MongoDB for data storage, with Redis being used as a caching service. Two endpoints have been implemented: one for saving user information (username and IP) to MongoDB, and another for retrieving the list of users and their IPs.
+This project involves the deployment of a simple web application in a containerized environment using Docker and Kubernetes. The application is built using Node.js and MongoDB for data storage, with Redis being used as a caching service. Two endpoints have been implemented: one for saving user information (username and IP) to MongoDB, and another for retrieving the list of users and their IPs.
 Notably, a Jenkins CI/CD pipeline has been integrated for streamlined development and deployment on Amazon EKS.
 
 ## :gear: Requirements:-
